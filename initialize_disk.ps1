@@ -1,4 +1,4 @@
-$rawDisks = Get-Disk | Where-Object PartitionStyle -eq "RAW" -or Where-Object OperationalStatus -eq "Offline"
+$rawDisks = Get-Disk | Where-Object { $_.PartitionStyle -eq "RAW" -or $_.OperationalStatus -eq "Offline" }
 
 if ($rawDisks.Count -eq 0) {
     Write-Host "No offline disks found to initialize."
