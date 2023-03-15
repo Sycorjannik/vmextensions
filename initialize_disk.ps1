@@ -1,4 +1,11 @@
-$rawDisks = Get-Disk | Where-Object { $_.PartitionStyle -eq "RAW" -or $_.OperationalStatus -eq "Offline" }
+param(
+    [Parameter(Mandatory=$true)]
+    [string[]]$number
+)
+
+foreach ($n in $number) {
+    switch ($n) {
+        1 {$rawDisks = Get-Disk | Where-Object { $_.PartitionStyle -eq "RAW" -or $_.OperationalStatus -eq "Offline" }
 
 if ($rawDisks.Count -eq 0) {
     Write-Host "No offline disks found to initialize."
@@ -18,4 +25,12 @@ foreach ($disk in $rawDisks) {
         Format-Volume -FileSystem NTFS -Confirm:$false
 
     Write-Host "Disk $($disk.Number) formatted with NTFS file system."
+}}
+        2 {Install-PackageProvider -Name NuGet -Force; Install-Module -Name Az -Scope AllUsers -Force}
+        3 { # execute code for number 3 }
+        default { Write-Error "Invalid number: $n" }
+    }
 }
+
+
+
