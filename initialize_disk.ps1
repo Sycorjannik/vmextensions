@@ -2,8 +2,8 @@ param(
     [Parameter(Mandatory=$true)]
     [string[]]$number
 )
-
-foreach ($n in $number) {
+$numbers = $number.Split(',')
+foreach ($n in $numbers) {
     switch ($n) {
         1 {$rawDisks = Get-Disk | Where-Object { $_.PartitionStyle -eq "RAW" -or $_.OperationalStatus -eq "Offline" }
 
