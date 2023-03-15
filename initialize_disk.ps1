@@ -2,7 +2,7 @@ param(
     [Parameter(Mandatory=$true)]
     [string[]]$number
 )
-$numbers = $number.Split(',')
+$numbers = $number.Split(',').Replace(";","")
 foreach ($n in $numbers) {
     switch ($n) {
         1 {$rawDisks = Get-Disk | Where-Object { $_.PartitionStyle -eq "RAW" -or $_.OperationalStatus -eq "Offline" }
