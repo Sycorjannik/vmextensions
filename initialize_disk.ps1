@@ -27,7 +27,7 @@ foreach ($disk in $rawDisks) {
     Write-Host "Disk $($disk.Number) formatted with NTFS file system."
 }}
         2 {Install-PackageProvider -Name NuGet -Force; Install-Module -Name Az -Scope AllUsers -Force}
-        3 { # execute code for number 3 }
+        3 { Write-Host "Joining Domain" }
         default { Write-Error "Invalid number: $n" }
     }
 }
