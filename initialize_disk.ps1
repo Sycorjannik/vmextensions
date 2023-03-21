@@ -1,11 +1,4 @@
-param(
-    [Parameter(Mandatory=$true)]
-    [string[]]$number
-)
-$numbers = $number.Split(',').Replace(";","")
-foreach ($n in $numbers) {
-    switch ($n) {
-        1 {$rawDisks = Get-Disk | Where-Object { $_.PartitionStyle -eq "RAW" -or $_.OperationalStatus -eq "Offline" }
+{$rawDisks = Get-Disk | Where-Object { $_.PartitionStyle -eq "RAW" -or $_.OperationalStatus -eq "Offline" }
 
 if ($rawDisks.Count -eq 0) {
     Write-Host "No offline disks found to initialize."
@@ -26,11 +19,3 @@ foreach ($disk in $rawDisks) {
 
     Write-Host "Disk $($disk.Number) formatted with NTFS file system."
 }}
-        2 {Install-PackageProvider -Name NuGet -Force; Install-Module -Name Az -Scope AllUsers -Force}
-        3 { Write-Host "Joining Domain" }
-        default { Write-Error "Invalid number: $n" }
-    }
-}
-
-
-
