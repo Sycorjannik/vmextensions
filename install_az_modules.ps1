@@ -1,0 +1,1 @@
+Install-PackageProvider -Name NuGet -Force; Install-Module -Name Az -Scope AllUsers -Force
