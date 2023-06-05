@@ -1,4 +1,4 @@
-{$rawDisks = Get-Disk | Where-Object { $_.PartitionStyle -eq "RAW" -or $_.OperationalStatus -eq "Offline" }
+$rawDisks = Get-Disk | Where-Object { $_.PartitionStyle -eq "RAW" -or $_.OperationalStatus -eq "Offline" }
 
 if ($rawDisks.Count -eq 0) {
     Write-Host "No offline disks found to initialize."
@@ -18,4 +18,4 @@ foreach ($disk in $rawDisks) {
         Format-Volume -FileSystem NTFS -Confirm:$false
 
     Write-Host "Disk $($disk.Number) formatted with NTFS file system."
-}}
+}
